@@ -1,6 +1,8 @@
 const express = require("express");
+const { createServer } = require('http');
 const cors = require("cors");
 const app = express();
+const httpServer = createServer(app);
 const path = require("path");
 const session = require("express-session");
 const cookieSession = require("cookie-session");
@@ -346,3 +348,5 @@ app.get(
 app.listen(3000, () => {
   console.log("Servidor iniciado en el puerto: 3000 by JDFM");
 });
+
+httpServer.listen(process.env.PORT || 3000 );
