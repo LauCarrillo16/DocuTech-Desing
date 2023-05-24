@@ -401,7 +401,7 @@ function RegistrarAuditoria(idusuario) {
       $("#spinner").hide();
       AlertCorrecta("Bienvenido al sistema!");
       setTimeout(function () {
-        window.location.href = "/modulos/tareasmenu/menu.html";
+        window.location.href = "/moduls/tareasmenu/menu.html";
       }, 1500);
     })
     .catch((error) => {
