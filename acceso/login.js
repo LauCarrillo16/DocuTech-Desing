@@ -142,7 +142,7 @@ function ValidarNuevoUsuario() {
   }
   $("#modalNewUser").modal("hide");
   spinner("Validando el usuario, por favor espere");
-  const url = "/api/EspecificLogin";
+  const url = "/modulos/routesUsuario.js/EspecificUser/:idusuario";
   const data = {
     usuario: UserUPP,
   };
@@ -175,7 +175,7 @@ function RegistrarNewUser() {
   let correo = $("#newCorreo").val();
   let nombreCompleto = $("#newName").val();
 
-  const url = "/api/NewUser";
+  const url = "/modulos/routesUsuario.js/crearUsuario";
   const data = {
     usuario: nuevoUsuario,
     password: SHA256(nuevoPass),
@@ -356,7 +356,7 @@ function AlertCorrecta(Texto) {
 function ValidarUsuario() {
   const usuario = $("#usuario").val().toUpperCase();
   const password = document.getElementById("password").value;
-  const url = "/api/usuarios";
+  const url = "/modulos/routesUsuario.js/EspecificLogin/:usuario";
   const data = {
     usuario: usuario,
     password: SHA256(password),
@@ -384,7 +384,7 @@ function ValidarUsuario() {
 function RegistrarAuditoria(idusuario) {
   spinner("Registrando Auditoria");
   let descripcionAuditoria = "Ingreso exitoso al sistema";
-  const url = "/api/NewAudtoria";
+  const url = "/modulos/routesAuditoria.js/newAuditoria";
   const data = {
     idusuario: idusuario,
     descripcion: descripcionAuditoria,
@@ -428,7 +428,7 @@ function CerrarAlerta() {
 }
 
 function IniciarSession(idusuario, idrol, nombre) {
-  fetch("/api/sesion", {
+  fetch("/modulos/routesUsuario.js/validarLogin", {
     method: "POST",
     body: JSON.stringify({ idusuario: idusuario, idrol: idrol, nombre: nombre }),
     headers: {
