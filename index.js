@@ -1,5 +1,4 @@
 const express = require("express");
-const bodyParser = require("body-parser");
 const mongoose = require("./conexion/conexionDB");
 const { createServer } = require('http');
 const cors = require("cors");
