@@ -7,7 +7,10 @@ const httpServer = createServer(app);
 const path = require("path");
 const session = require("express-session");
 const cookieSession = require("cookie-session");
-const portApi = 4000;
+
+const routesUsuario = require("./modulos/routesUsuario");
+app.use("/usuarios", routesUsuario);
+
 
 app.get(
   [
@@ -98,6 +101,8 @@ app.get(
     "/Multimedia/newGestion.svg",
     "/Multimedia/detallado.svg",
     "/Multimedia/auditor.svg",
+    "/modelos/usuarios.js",
+    "/modulos/routesUsuario.js"
   ],
   (req, res) => {
     res.sendFile(__dirname + req.path);
@@ -189,13 +194,7 @@ app.get("/api/logout", (req, res) => {
 
 app.use(express.static("public"));
 
-if (require.main === module) {
-  app.use("/api", require("./api"));
-}
 
-app.listen(portApi, () => {
-  console.log(`Database API corriendo en el puerto: ${portApi} by JDFM`);
-});
 
 app.use(express.json());
 
@@ -350,4 +349,4 @@ app.listen(3000, () => {
   console.log("Servidor iniciado en el puerto: 3000 by JDFM");
 });
 
-httpServer.listen(process.env.PORT || 3000 );
+httpServer.listen(process.env.PORT || 5000 );

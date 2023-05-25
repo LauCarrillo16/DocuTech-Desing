@@ -2,7 +2,7 @@ var idrol = null;
 var idUsuario = null;
 
 $(document).ready(function () {
-  verificarSesionM();
+ // verificarSesionM();
 
   if (document.cookie.indexOf("mostradoModal=true") === -1) {
     $("#modalUser").modal("show");

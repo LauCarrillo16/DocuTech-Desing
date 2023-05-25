@@ -7,8 +7,8 @@ $(document).ready(function () {
     var tecla = event.keyCode
       ? event.keyCode
       : event.which
-      ? event.which
-      : event.charCode;
+        ? event.which
+        : event.charCode;
     if (tecla === 13) {
       setTimeout(function () {
         verificarLogin();
@@ -56,8 +56,8 @@ $(document).ready(function () {
     var tecla = event.keyCode
       ? event.keyCode
       : event.which
-      ? event.which
-      : event.charCode;
+        ? event.which
+        : event.charCode;
     if (tecla === 13) {
       setTimeout(function () {
         verificarLogin();
@@ -142,12 +142,12 @@ function ValidarNuevoUsuario() {
   }
   $("#modalNewUser").modal("hide");
   spinner("Validando el usuario, por favor espere");
-  const url = "/modulos/routesUsuario.js/EspecificUser/:idusuario";
+  const url = "/usuarios/EspecificLogin/" + nuevoUsuario;
   const data = {
     usuario: UserUPP,
   };
   fetch(url, {
-    method: "POST",
+    method: "GET",
     body: JSON.stringify(data),
     headers: {
       "Content-Type": "application/json",
@@ -175,7 +175,7 @@ function RegistrarNewUser() {
   let correo = $("#newCorreo").val();
   let nombreCompleto = $("#newName").val();
 
-  const url = "/modulos/routesUsuario.js/crearUsuario";
+  const url = "/usuarios/crearUsuario";
   const data = {
     usuario: nuevoUsuario,
     password: SHA256(nuevoPass),
@@ -192,7 +192,7 @@ function RegistrarNewUser() {
   })
     .then((response) => response.json())
     .then((result) => {
-      enviarCorreo();
+      //enviarCorreo();
     })
     .catch((error) => {
       console.error("Error al ingresar:", error);
@@ -356,10 +356,10 @@ function AlertCorrecta(Texto) {
 function ValidarUsuario() {
   const usuario = $("#usuario").val().toUpperCase();
   const password = document.getElementById("password").value;
-  const url = "/modulos/routesUsuario.js/EspecificLogin/:usuario";
+  const url = "/usuarios/validarLogin";
   const data = {
     usuario: usuario,
-    password: SHA256(password),
+    password: (password),
   };
   fetch(url, {
     method: "POST",
@@ -400,9 +400,7 @@ function RegistrarAuditoria(idusuario) {
     .then((result) => {
       $("#spinner").hide();
       AlertCorrecta("Bienvenido al sistema!");
-      setTimeout(function () {
-        window.location.href = "/moduls/tareasmenu/menu.html";
-      }, 1500);
+
     })
     .catch((error) => {
       console.error("Error al ingresar:", error);
@@ -435,7 +433,10 @@ function IniciarSession(idusuario, idrol, nombre) {
       "Content-Type": "application/json",
     },
   });
-  RegistrarAuditoria(idusuario);
+  setTimeout(function () {
+    window.location.href = "/moduls/tareasmenu/menu.html";
+  }, 1500);
+  // RegistrarAuditoria(idusuario);
 }
 
 function spinner(texto) {
