@@ -99,15 +99,11 @@ router.get("/eliminarUsuario/:idusuario", async (req, res) => {
 
 // Validar USUARIO para iniciar Sesion (READ AND VALIDATION)
 router.post("/validarLogin", async (req, res) => {
-  console.log("buenas");
   try {
     const { usuario, password } = req.body;
     const user = await Usuario.findOne({ usuario: usuario });
-
-    console.log(usuario);
     if (user) {
       if (user.password === password) {
-        console.log("ACCESO CONCEDIDO");
         res.json("Acceso validado!");
       } else {
         res.status(401).send("Contraseña incorrecta");

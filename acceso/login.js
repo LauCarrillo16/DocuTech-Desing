@@ -384,7 +384,7 @@ function ValidarUsuario() {
 function RegistrarAuditoria(idusuario) {
   spinner("Registrando Auditoria");
   let descripcionAuditoria = "Ingreso exitoso al sistema";
-  const url = "/modulos/routesAuditoria.js/newAuditoria";
+  const url = "/routesAuditoria/newAuditoria";
   const data = {
     idusuario: idusuario,
     descripcion: descripcionAuditoria,

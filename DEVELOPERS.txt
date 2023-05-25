@@ -1,0 +1,9 @@
+//Desarrolladores//
+*Jhosep Davis Florez Madiedo
+*Will Defredsho Arnache Dorias
+*Laura Yuliana Carrillo Almeida
+
+
+//Para iniciar sesion ingresar usuario y contraseña asignados, corrigiendo enrutamientos para resgistrar usuario.
+//usuario: usuario1
+//password: password1
