@@ -9,7 +9,10 @@ const session = require("express-session");
 const cookieSession = require("cookie-session");
 
 const routesUsuario = require("./modulos/routesUsuario");
-app.use("/usuarios", routesUsuario);
+app.use("/usuarios", routesUsuario)
+
+const routesAuditoria = require("./modulos/routesAuditoria");
+app.use("/auditorias", routesAuditoria);
 
 
 app.get(

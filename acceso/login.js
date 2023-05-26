@@ -142,13 +142,9 @@ function ValidarNuevoUsuario() {
   }
   $("#modalNewUser").modal("hide");
   spinner("Validando el usuario, por favor espere");
-  const url = "/usuarios/EspecificLogin/" + nuevoUsuario;
-  const data = {
-    usuario: UserUPP,
-  };
-  fetch(url, {
+  const url1 = "/usuarios/EspecificLogin/" + UserUPP;
+  fetch(url1, {
     method: "GET",
-    body: JSON.stringify(data),
     headers: {
       "Content-Type": "application/json",
     },
@@ -178,11 +174,12 @@ function RegistrarNewUser() {
   const url = "/usuarios/crearUsuario";
   const data = {
     usuario: nuevoUsuario,
-    password: SHA256(nuevoPass),
+    password: (nuevoPass),
     idrol: 2,
     nombre: nombreCompleto,
     correo: correo,
   };
+
   fetch(url, {
     method: "POST",
     body: JSON.stringify(data),
@@ -192,59 +189,18 @@ function RegistrarNewUser() {
   })
     .then((response) => response.json())
     .then((result) => {
-      //enviarCorreo();
+      AlertCorrectX("Usuario registrado en el sistema!! ");
+      $("#usuario").val(nuevoUsuario);
+      $("#password").val(nuevoPass);
+      limpiarNewUser();
+      $("#spinner").hide();
     })
     .catch((error) => {
       console.error("Error al ingresar:", error);
       $("#spinner").hide();
     });
 }
-function enviarCorreo() {
-  spinner("Enviando información al correo electronico!");
-  let nuevoUsuario = $("#newUser").val().toUpperCase();
-  let nuevoPass = $("#newPassword").val();
-  let nombre = $("#newName").val().toUpperCase();
-  const mensaje =
-    "<p>Hola! <b>" +
-    nombre +
-    ", </b>gracias por registrarte en el sistema de gestion de mantenimientos de <b>DOCUTECH.</b> <br> <p>Estos son tus datos de acceso!</p> <br>🎯 <b>Login:</b> " +
-    nuevoUsuario +
-    "<br>⭐<b>Contraseña:</b> " +
-    nuevoPass +
-    "</p><br>Recuerda que puedes iniciar sesión en el siguiente link: <p>http://34.125.36.154:3000/acceso/Login.html</p> ";
-  const correo = $("#newCorreo").val();
-  const asunto = "Bienvenido a DOCUTECH";
 
-  const data = {
-    correo: correo,
-    asunto: asunto,
-    mensaje: mensaje,
-  };
-
-  fetch("/EnvioDecorreo", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(data),
-  })
-    .then((response) => {
-      if (response.ok) {
-        spinner("Enviando información al correo electronico!");
-        AlertCorrectX("Usuario registrado en el sistema!! ");
-        $("#usuario").val(nuevoUsuario);
-        $("#password").val(nuevoPass);
-        limpiarNewUser();
-        $("#spinner").hide();
-      } else {
-        $("#modalNewUser").modal("show");
-        throw new Error("Error al enviar el correo electrónico");
-      }
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-}
 
 function verificarLogin() {
   var usuario = $("#usuario").val().trim();
@@ -383,28 +339,52 @@ function ValidarUsuario() {
 
 function RegistrarAuditoria(idusuario) {
   spinner("Registrando Auditoria");
-  let descripcionAuditoria = "Ingreso exitoso al sistema";
-  const url = "/routesAuditoria/newAuditoria";
-  const data = {
-    idusuario: idusuario,
-    descripcion: descripcionAuditoria,
-  };
-  fetch(url, {
-    method: "POST",
-    body: JSON.stringify(data),
+
+  let usuario ={};
+  const url1 = "/usuarios/EspecificUser/" + idusuario;
+  fetch(url1, {
+    method: "GET",
     headers: {
       "Content-Type": "application/json",
     },
   })
     .then((response) => response.json())
     .then((result) => {
-      $("#spinner").hide();
-      AlertCorrecta("Bienvenido al sistema!");
-
+    usuario = result;
+    let descripcionAuditoria = "Ingreso exitoso al sistema";
+    const url = "/auditorias/newAuditoria";
+    const data = {
+      usuario: usuario,
+      descripcion: descripcionAuditoria,
+    };
+    fetch(url, {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => response.json())
+      .then((result) => {
+        $("#spinner").hide();
+        AlertCorrecta("Bienvenido al sistema!");
+        setTimeout(function () {
+          window.location.href = "/moduls/tareasmenu/menu.html";
+        }, 1500);
+      })
+      .catch((error) => {
+        console.error("Error al ingresar:", error);
+      });
     })
     .catch((error) => {
-      console.error("Error al ingresar:", error);
+      AlertIncorrecta("No se pudo registrar");
+      $("#spinner").hide();
     });
+
+
+
+
+
 }
 
 function limpiarNewUser() {
@@ -433,10 +413,9 @@ function IniciarSession(idusuario, idrol, nombre) {
       "Content-Type": "application/json",
     },
   });
-  setTimeout(function () {
-    window.location.href = "/moduls/tareasmenu/menu.html";
-  }, 1500);
-  // RegistrarAuditoria(idusuario);
+  
+  RegistrarAuditoria(idusuario);
+  
 }
 
 function spinner(texto) {

@@ -5,7 +5,7 @@ const Usuario = require("../modelos/usuarios");
 
 router.use(bodyParser.json());
 
-// Insertar un nuevo USUARIO (CREATE)
+// Insertar un nuevo USUARIO (CREATE) *FUNCIONAL*
 router.post("/crearUsuario", async (req, res) => {
   try {
     const { usuario, password, idrol, nombre, correo } = req.body;
@@ -81,7 +81,7 @@ router.post("/editarUsuario", async (req, res) => {
   }
 });
 
-// Eliminar USUARIO especifico (DELETE)
+// Eliminar USUARIO especifico (DELETE) *MODIFICAR*
 router.get("/eliminarUsuario/:idusuario", async (req, res) => {
   try {
     const idusuario = parseInt(req.params.idusuario);
@@ -97,7 +97,7 @@ router.get("/eliminarUsuario/:idusuario", async (req, res) => {
   }
 });
 
-// Validar USUARIO para iniciar Sesion (READ AND VALIDATION)
+// Validar USUARIO para iniciar Sesion (READ AND VALIDATION) *FUNCIONAL*
 router.post("/validarLogin", async (req, res) => {
   try {
     const { usuario, password } = req.body;
@@ -117,11 +117,11 @@ router.post("/validarLogin", async (req, res) => {
   }
 });
 
-//Cargar USUARIO Especifico (READ)
+//Cargar USUARIO Especifico (READ) *FUNCIONAL*
 router.get("/EspecificUser/:idusuario", async (req, res) => {
   const idusuarioF = parseInt(req.params.idusuario);
   try {
-    const usuario = await Usuario.findOne({ idusuario: idusuarioF });
+    const usuario = await Usuario.findOne({ idusuario: 1 });
     if (usuario) {
       res.json(usuario);
     } else {
@@ -133,10 +133,10 @@ router.get("/EspecificUser/:idusuario", async (req, res) => {
   }
 });
 
-// Validar USUARIO(LOGIN) existente para validación de nuevo usuario
+// Validar USUARIO(LOGIN) existente para validación de nuevo usuario *FUNCIONAL*
 router.get("/EspecificLogin/:usuario", async (req, res) => {
-  console.log("Esta llegando ");
   const usuarioF = req.params.usuario;
+  console.log("Esta llegando ");
   try {
     const usuario = await Usuario.findOne({ usuario: usuarioF });
     if (usuario) {

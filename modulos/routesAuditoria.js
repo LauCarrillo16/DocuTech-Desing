@@ -22,7 +22,7 @@ router.get("/totalAuditorias", async (req, res) => {
 });
 
 
-// Crear una auditoria servicio
+// Crear una auditoria servicio *FUNCIONAL*
 router.post("/newAuditoria", async (req, res) => {
   try {
     const {
