@@ -2,7 +2,7 @@ var idrol = null;
 var idUsuario = null;
 
 $(document).ready(function () {
-  verificarSesionT();
+  //verificarSesionT();
 
   $("#VolverMenu").on("click", function () {
     window.location.href = "../tareasmenu/menu.html";

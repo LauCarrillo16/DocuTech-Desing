@@ -3,7 +3,7 @@ var idUsuario = null;
 var idServicioAsignable = "";
 
 $(document).ready(function () {
-  verificarSesion();
+  //verificarSesion();
   CargarTecnicos();
   cargarServiciosEnCola();
   LimpiarModal();
@@ -19,7 +19,7 @@ $(document).ready(function () {
 
 function CargarTecnicos() {
   spinner("Cargando técnicos, por favor espere");
-  const url = "/api/cargarTecnicos";
+  const url = "/usuarios/cargarTecnicos";
   fetch(url)
     .then((response) => response.json())
     .then((usuarios) => {
@@ -86,7 +86,7 @@ function AlertaIncorrecta(Texto) {
 
 function cargarServiciosEnCola() {
   spinner("Cargando servicios, por favor espere");
-  const url = "/api/serviciosSinAsignar";
+  const url = "/servicios/servicioEnCola";
   fetch(url)
     .then((response) => response.json())
     .then((result) => {
@@ -318,7 +318,7 @@ function RegistrarAuditoria(idservicio) {
     idservicio +
     " a el tecnico: " +
     tecnicoAsignado;
-  const url = "/api/NewAudtoria";
+  const url = "/auditorias/newAuditoria";
   const data = {
     idusuario: idUsuario,
     descripcion: descripcionAuditoria,

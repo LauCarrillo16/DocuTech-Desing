@@ -2,7 +2,7 @@ var idrol = null;
 var idUsuario = null;
 
 $(document).ready(function () {
-  verificarSesion();
+  //verificarSesion();
   LimpiarDatos();
 
   var urlParams = new URLSearchParams(window.location.search);

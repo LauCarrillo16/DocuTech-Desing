@@ -2,7 +2,7 @@ var idrol = null;
 var idUsuario = null;
 
 $(document).ready(function () {
-  verificarSesion();
+  //verificarSesion();
   cargarAuditorias();
 
   $("#VolverMenu").on("click", function () {

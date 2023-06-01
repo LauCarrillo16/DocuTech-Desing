@@ -2,7 +2,8 @@ var idrol = null;
 var idUsuario = null;
 
 $(document).ready(function () {
-  verificarSesion();
+  //verificarSesion();
+  
   cargarServicios();
 
   $("#VolverMenu").on("click", function () {
@@ -49,8 +50,8 @@ $(document).ready(function () {
 });
 
 function cargarServicios() {
-  spinner("Cargando servicios, por favor espere");
-  const url = "/api/serviciosTotal";
+  //spinner("Cargando servicios, por favor espere");
+  const url = "/servicios/totalServicios";
   fetch(url)
     .then((response) => response.json())
     .then((result) => {

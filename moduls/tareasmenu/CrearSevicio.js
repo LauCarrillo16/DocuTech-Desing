@@ -2,7 +2,7 @@ var idrol = null;
 var idUsuario = null;
 
 $(document).ready(function () {
-  verificarSesion();
+  //verificarSesion();
   LimpiarFormulario();
 
   $("#VolverMenu").on("click", function () {
@@ -81,7 +81,7 @@ function RealizarInsercion() {
   let numeroserie = $("#numeroSerie").val();
   let modelo = $("#modelo").val();
 
-  const url = "/api/NewForm";
+  const url = "/servicios/crearServicio";
   const data = {
     idusuario: idUsuario,
     comentariosentrada,
@@ -113,7 +113,7 @@ function RegistrarAuditoriaC(datos) {
   spinner("Registrando Auditoria");
   let descripcionAuditoria =
     "Registro de un nuevo servicio con id:" + datos.servicio.idservicio;
-  const url = "/api/NewAudtoria";
+  const url = "/auditorias/newAuditoria";
   const data = {
     idusuario: idUsuario,
     descripcion: descripcionAuditoria,

@@ -14,6 +14,9 @@ app.use("/usuarios", routesUsuario)
 const routesAuditoria = require("./modulos/routesAuditoria");
 app.use("/auditorias", routesAuditoria);
 
+const routesServicio = require("./modulos/routesServicio");
+app.use("/servicios", routesServicio);
+
 
 app.get(
   [
@@ -105,7 +108,9 @@ app.get(
     "/Multimedia/detallado.svg",
     "/Multimedia/auditor.svg",
     "/modelos/usuarios.js",
-    "/modulos/routesUsuario.js"
+    "/modelos/servicios.js",
+    "/modulos/routesUsuario.js",
+    "/modulos/routesServicio.js"
   ],
   (req, res) => {
     res.sendFile(__dirname + req.path);

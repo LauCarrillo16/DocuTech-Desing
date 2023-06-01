@@ -6,7 +6,7 @@ const Usuario = require("../modelos/usuarios");
 
 router.use(bodyParser.json());
 
-//Cargar todos los servicios (READ)  *FUNCIONAL*
+//Cargar TODOS los SERVICIOS (READ)  *FUNCIONAL*
 router.get("/totalServicios", async (req, res) => {
   try {
     const servicios = await Servicio.find({});
@@ -21,7 +21,7 @@ router.get("/totalServicios", async (req, res) => {
   }
 });
 
-//Cargar servicios en cola (READ) *FUNCIONAL**
+//Cargar SERVICIOS en COLA (READ) *FUNCIONAL**
 router.get('/servicioEnCola', async (req, res) => {
   try {
     const estado = "En cola";
@@ -38,7 +38,7 @@ router.get('/servicioEnCola', async (req, res) => {
 });
 
 
-//Cargar servicio Especifico (READ) *FUNCIONAL**
+//Cargar SERVICIO ESPECIFICO (READ) *FUNCIONAL**
 router.get("/servicioEspecifico/:idservicio", async (req, res) => {
   try {
     const idservicioF = parseInt(req.params.idservicio);
@@ -55,8 +55,7 @@ router.get("/servicioEspecifico/:idservicio", async (req, res) => {
 });
 
 
-
-// Cargar servicios en mantenimiento de un usuario (READ) *FUNCIONAL**
+// Cargar SERVICIO en MANTENIMIENTO de un USUARIO (READ) *FUNCIONAL**
 router.get("/serviciosUsuario/:idusuario", async (req, res) => {
   try {
     const idusuarioF = parseInt(req.params.idusuario);
@@ -74,8 +73,13 @@ router.get("/serviciosUsuario/:idusuario", async (req, res) => {
 });
 
 
-// Cargar servicios de un tecnico// FUNCIONAL**
-router.get("/serviciosUsuario/:idusuario", async (req, res) => {
+// Asignar servicio especifico//SERVICIOS
+
+
+
+
+// Cargar SERVICIOS de un TECNICO// -----FUNCIONAL**
+router.get("/serviciosTecnico/:idusuario", async (req, res) => {
   try {
     const idusuarioF = parseInt(req.params.idusuario);
     const estado = "En mantenimiento";
@@ -83,7 +87,7 @@ router.get("/serviciosUsuario/:idusuario", async (req, res) => {
     if (serviciosTecAsignados.length > 0) {
       res.json(serviciosTecAsignados);
     } else {
-      res.status(404).send("No se encontraron servicios en mantenimiento");
+      res.status(404).send("No se encontraron servicios para el tecnico en mantenimiento");
     }
   } catch (err) {
     console.error(err);
@@ -91,16 +95,16 @@ router.get("/serviciosUsuario/:idusuario", async (req, res) => {
   }
 });
 
-// Cargar servicios finalizados de un tecnico//SERVICIOS
-router.get("/serviciosUsuario/:idusuario", async (req, res) => {
+// Cargar SERVICIOS FINALIZADOS de un TECNICO//SERVICIOS
+router.get("/serviciosTecnicoFin/:idusuario", async (req, res) => {
   try {
     const idusuarioF = parseInt(req.params.idusuario);
     const estado = ["Listo para entregar", "Entregado"];
-    const serviciosTecAsignados = await Servicio.find({ "tecnico.idusuario": idusuarioF, estado: { $in: estado } });
-    if (serviciosTecAsignados.length > 0) {
-      res.json(serviciosTecAsignados);
+    const serviciosTecFinalizados = await Servicio.find({ "tecnico.idusuario": idusuarioF, estado: { $in: estado } });
+    if (serviciosTecFinalizados.length > 0) {
+      res.json(serviciosTecFinalizados);
     } else {
-      res.status(404).send("No se encontraron servicios en mantenimiento");
+      res.status(404).send("No se encontraron servicios finalizados para el tecnico");
     }
   } catch (err) {
     console.error(err);
@@ -110,7 +114,7 @@ router.get("/serviciosUsuario/:idusuario", async (req, res) => {
 
 
 
-// Cargar servicios entregados de un usuario (READ) *FUNCIONAL**
+// Cargar SERVICIOS ENTREGADOS de un USUARIO (READ) *FUNCIONAL**
 router.get("/serviciosEntregadosUsuario/:idusuario", async (req, res) => {
   try {
     const idusuarioF = parseInt(req.params.idusuario);
@@ -129,7 +133,7 @@ router.get("/serviciosEntregadosUsuario/:idusuario", async (req, res) => {
 
 
 
-//Editar SERVICIO especififco (UPDATE) *FUNCIONAL*
+//EDITAR SERVICIO especififco (UPDATE) *FUNCIONAL*
 router.post("/EditService", async (req, res) => {
   try {
     const {
@@ -169,7 +173,7 @@ router.post("/EditService", async (req, res) => {
   }
 });
 
-// Crear un servicio *FUNCIONAL*
+// CREAR un SERVICIO *FUNCIONAL*
 router.post("/crearServicio", async (req, res) => {
   try {
     const {

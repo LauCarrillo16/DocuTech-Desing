@@ -3,7 +3,7 @@ var idUsuario = null;
 var comentariosVigentes = "";
 
 $(document).ready(function () {
-  verificarSesion();
+  //verificarSesion();
   LimpiarFormulario();
 
   var urlParams = new URLSearchParams(window.location.search);

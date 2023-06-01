@@ -406,7 +406,7 @@ function CerrarAlerta() {
 }
 
 function IniciarSession(idusuario, idrol, nombre) {
-  fetch("/modulos/routesUsuario.js/validarLogin", {
+  fetch("/api/sesion", {
     method: "POST",
     body: JSON.stringify({ idusuario: idusuario, idrol: idrol, nombre: nombre }),
     headers: {
